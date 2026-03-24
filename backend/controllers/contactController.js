@@ -6,7 +6,7 @@ import crypto from 'crypto';
 // @route   POST /api/contact/submit
 // @access  Public
 export const submitContactForm = async (req, res) => {
-  const { name, email, phone, service } = req.body;
+  const { name, email, service, message } = req.body;
 
   try {
     // Generate a 6-digit OTP
@@ -21,8 +21,8 @@ export const submitContactForm = async (req, res) => {
     if (contactInfo) {
       // Update existing pending request
       contactInfo.name = name;
-      contactInfo.phone = phone;
       contactInfo.service = service;
+      contactInfo.message = message;
       contactInfo.otp = otp;
       contactInfo.otpExpires = otpExpires;
       await contactInfo.save();
@@ -31,8 +31,8 @@ export const submitContactForm = async (req, res) => {
       contactInfo = await Contact.create({
         name,
         email,
-        phone,
         service,
+        message,
         otp,
         otpExpires,
       });
@@ -95,8 +95,8 @@ export const verifyContactOTP = async (req, res) => {
         New Contact Submission:
         Name: ${contactInfo.name}
         Email: ${contactInfo.email}
-        Phone: ${contactInfo.phone}
         Service: ${contactInfo.service}
+        Message: ${contactInfo.message}
       `;
 
       await sendEmail({
@@ -107,8 +107,8 @@ export const verifyContactOTP = async (req, res) => {
           <h2>New Contact Inquiry</h2>
           <p><strong>Name:</strong> ${contactInfo.name}</p>
           <p><strong>Email:</strong> ${contactInfo.email}</p>
-          <p><strong>Phone:</strong> ${contactInfo.phone}</p>
           <p><strong>Service Requested:</strong> ${contactInfo.service}</p>
+          <p><strong>Message:</strong> ${contactInfo.message}</p>
         `,
       });
     } catch (adminEmailError) {

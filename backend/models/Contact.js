@@ -12,10 +12,6 @@ const contactSchema = new mongoose.Schema(
       lowercase: true,
       trim: true,
     },
-    phone: {
-      type: String,
-      required: [true, 'Phone number is required'],
-    },
     service: {
       type: String,
       required: [true, 'Service selection is required'],
@@ -26,6 +22,10 @@ const contactSchema = new mongoose.Schema(
         'video editing',
         'automation',
       ],
+    },
+    message: {
+      type: String,
+      required: [true, 'Message is required'],
     },
     isEmailVerified: {
       type: Boolean,

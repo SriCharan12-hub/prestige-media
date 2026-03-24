@@ -4,7 +4,6 @@ const ContactUs = () => {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
-    phone: '',
     service: 'web application',
   });
   
@@ -92,10 +91,6 @@ const ContactUs = () => {
           <label>
             Email:
             <input type="email" name="email" value={formData.email} onChange={handleChange} required style={{ width: '100%', padding: '8px' }}/>
-          </label>
-          <label>
-            Phone Number:
-            <input type="tel" name="phone" value={formData.phone} onChange={handleChange} required style={{ width: '100%', padding: '8px' }}/>
           </label>
           <label>
             Services:
