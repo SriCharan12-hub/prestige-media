@@ -21,10 +21,10 @@ export default function Footer() {
               Transforming ambitious ideas into stunning digital experiences. We build web applications that perform and convert.
             </p>
             <div className="flex items-center gap-4 mt-2">
-              <a href="#" className="text-slate-400 hover:text-blue-500 transition-colors"><Twitter className="w-5 h-5" /></a>
+          
               <a href="#" className="text-slate-400 hover:text-blue-500 transition-colors"><Instagram className="w-5 h-5" /></a>
               <a href="#" className="text-slate-400 hover:text-blue-500 transition-colors"><Linkedin className="w-5 h-5" /></a>
-              <a href="#" className="text-slate-400 hover:text-white transition-colors"><Github className="w-5 h-5" /></a>
+          
             </div>
           </div>
 
