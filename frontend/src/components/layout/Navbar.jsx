@@ -36,50 +36,72 @@ export default function Navbar({ isDarkMode, toggleDarkMode }) {
   };
 
   return (
-    <header
+    <motion.header
+      initial={{ y: -100 }}
+      animate={{ y: 0 }}
+      transition={{ type: 'spring', stiffness: 100, damping: 20 }}
       className={cn(
-        'fixed top-0 left-0 right-0 z-50 transition-all duration-300',
+        'fixed top-0 left-0 right-0 z-50 transition-colors duration-300',
         isScrolled ? 'glass py-3' : 'bg-transparent py-5'
       )}
     >
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" onClick={(e) => handleSmoothScroll(e, '#home')} className="flex items-center gap-2 group">
-          <img src="https://res.cloudinary.com/dce9kp5hu/image/upload/v1774352484/1000120007-removebg-preview_wqa3uj.png" style={{height:"50px"}}/>
+          <motion.img 
+            whileHover={{ scale: 1.05, rotate: -5 }}
+            transition={{ type: 'spring', stiffness: 300, damping: 10 }}
+            src="https://res.cloudinary.com/dce9kp5hu/image/upload/v1774352484/1000120007-removebg-preview_wqa3uj.png" 
+            style={{height:"50px"}}
+          />
           <span className="text-xl font-bold tracking-tight">PrestigeWaveMedia</span>
         </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <a
+          {navLinks.map((link, i) => (
+            <motion.a
               key={link.name}
               href={link.href}
               onClick={(e) => handleSmoothScroll(e, link.href)}
-              className="text-sm font-medium hover:text-blue-500 transition-colors"
+              initial={{ opacity: 0, y: -20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.1 * i, type: 'spring', stiffness: 100 }}
+              whileHover={{ y: -2 }}
+              className="text-sm font-medium hover:text-blue-500 transition-colors relative"
             >
               {link.name}
-            </a>
+            </motion.a>
           ))}
         </nav>
 
         {/* Action Buttons */}
         <div className="flex items-center gap-4">
-          <button
+          <motion.button
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.5 }}
+            whileHover={{ scale: 1.1, rotate: 15 }}
+            whileTap={{ scale: 0.9 }}
             onClick={toggleDarkMode}
             className="p-2 rounded-full hover:bg-black/5 dark:hover:bg-white/10 transition-colors"
             aria-label="Toggle dark mode"
           >
             {isDarkMode ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-          </button>
+          </motion.button>
 
-          <a
+          <motion.a
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.6 }}
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.95 }}
             href="#contact"
             onClick={(e) => handleSmoothScroll(e, '#contact')}
             className="hidden md:inline-flex items-center justify-center px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors shadow-lg shadow-blue-500/30"
           >
             Get Started
-          </a>
+          </motion.a>
 
           {/* Mobile Menu Toggle */}
           <button
@@ -120,6 +142,6 @@ export default function Navbar({ isDarkMode, toggleDarkMode }) {
           </motion.div>
         )}
       </AnimatePresence>
-    </header>
+    </motion.header>
   );
 }

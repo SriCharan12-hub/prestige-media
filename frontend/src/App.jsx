@@ -3,6 +3,7 @@ import { Routes, Route } from 'react-router-dom'
 import Navbar from './components/layout/Navbar'
 import Footer from './components/layout/Footer'
 import Home from './pages/Home'
+import CustomCursor from './components/ui/CustomCursor'
 
 function App() {
   const [isDarkMode, setIsDarkMode] = useState(true)
@@ -28,6 +29,7 @@ function App() {
 
   return (
     <div className="flex flex-col min-h-screen">
+      <CustomCursor />
       <Navbar isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
       
       <main className="flex-grow">

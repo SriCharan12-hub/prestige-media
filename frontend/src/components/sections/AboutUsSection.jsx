@@ -7,13 +7,17 @@ export default function AboutUsSection() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.2 }
+      transition: { staggerChildren: 0.2, delayChildren: 0.1 }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+    hidden: { opacity: 0, y: 30 },
+    visible: { 
+      opacity: 1, 
+      y: 0, 
+      transition: { type: 'spring', stiffness: 80, damping: 20 } 
+    }
   };
 
   return (
@@ -25,7 +29,7 @@ export default function AboutUsSection() {
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.6 }}
+            transition={{ type: 'spring', stiffness: 60, damping: 20 }}
           >
             <h2 className="text-3xl md:text-5xl font-bold mb-6">
               Who We Are
@@ -40,18 +44,37 @@ export default function AboutUsSection() {
             <div className="flex items-center gap-4">
               <div className="flex -space-x-4">
                 {[...Array(4)].map((_, i) => (
-                  <div key={i} className="w-12 h-12 rounded-full border-2 border-white dark:border-zinc-900 bg-slate-200 dark:bg-zinc-800 flex items-center justify-center overflow-hidden">
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.5 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 + i * 0.1, type: "spring" }}
+                    key={i} 
+                    className="w-12 h-12 rounded-full border-2 border-white dark:border-zinc-900 bg-slate-200 dark:bg-zinc-800 flex items-center justify-center overflow-hidden"
+                  >
                     <img src={`https://i.pravatar.cc/100?img=${i + 10}`} alt="Team Member" className="w-full h-full object-cover" />
-                  </div>
+                  </motion.div>
                 ))}
-                <div className="w-12 h-12 rounded-full border-2 border-white dark:border-zinc-900 bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center text-sm font-bold text-blue-600 dark:text-blue-400">
+                <motion.div 
+                  initial={{ opacity: 0, scale: 0.5 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.7, type: "spring" }}
+                  className="w-12 h-12 rounded-full border-2 border-white dark:border-zinc-900 bg-blue-100 dark:bg-blue-900/50 flex items-center justify-center text-sm font-bold text-blue-600 dark:text-blue-400"
+                >
                   +5
-                </div>
+                </motion.div>
               </div>
-              <div className="text-sm font-medium text-slate-600 dark:text-zinc-400">
+              <motion.div 
+                 initial={{ opacity: 0, x: 20 }}
+                 whileInView={{ opacity: 1, x: 0 }}
+                 viewport={{ once: true }}
+                 transition={{ delay: 0.8 }}
+                 className="text-sm font-medium text-slate-600 dark:text-zinc-400"
+              >
                 <span className="block text-slate-900 dark:text-white font-bold text-lg">9+</span>
                 Dedicated Experts
-              </div>
+              </motion.div>
             </div>
           </motion.div>
 
@@ -63,29 +86,39 @@ export default function AboutUsSection() {
             className="flex flex-col gap-6"
           >
             {/* Mission */}
-            <motion.div variants={itemVariants} className="p-8 rounded-2xl bg-white dark:bg-zinc-900 shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-white/5 relative overflow-hidden group">
+            <motion.div 
+               variants={itemVariants} 
+               whileHover={{ y: -5, scale: 1.02 }}
+               transition={{ type: "spring", stiffness: 300 }}
+               className="cursor-pointer p-8 rounded-2xl bg-white dark:bg-zinc-900 shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-white/5 relative overflow-hidden group"
+            >
               <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
-                <Target className="w-32 h-32" />
+                <Target className="w-32 h-32 transform group-hover:scale-110 transition-transform duration-500" />
               </div>
               <div className="w-12 h-12 rounded-xl bg-blue-100 dark:bg-blue-900/30 text-blue-600 dark:text-blue-400 flex items-center justify-center mb-6">
                 <Target className="w-6 h-6" />
               </div>
               <h3 className="text-xl font-bold mb-3">Our Mission</h3>
-              <p className="text-slate-600 dark:text-zinc-400">
+              <p className="text-slate-600 dark:text-zinc-400 relative z-10">
                 To empower businesses by delivering scalable, cutting-edge web infrastructure and breathtaking designs that outpace the competition.
               </p>
             </motion.div>
 
             {/* Vision */}
-            <motion.div variants={itemVariants} className="p-8 rounded-2xl bg-white dark:bg-zinc-900 shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-white/5 relative overflow-hidden group">
+            <motion.div 
+               variants={itemVariants} 
+               whileHover={{ y: -5, scale: 1.02 }}
+               transition={{ type: "spring", stiffness: 300 }}
+               className="cursor-pointer p-8 rounded-2xl bg-white dark:bg-zinc-900 shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-white/5 relative overflow-hidden group"
+            >
               <div className="absolute top-0 right-0 p-8 opacity-5 group-hover:opacity-10 transition-opacity">
-                <Rocket className="w-32 h-32" />
+                <Rocket className="w-32 h-32 transform group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform duration-500" />
               </div>
               <div className="w-12 h-12 rounded-xl bg-purple-100 dark:bg-purple-900/30 text-purple-600 dark:text-purple-400 flex items-center justify-center mb-6">
                 <Rocket className="w-6 h-6" />
               </div>
               <h3 className="text-xl font-bold mb-3">Our Vision</h3>
-              <p className="text-slate-600 dark:text-zinc-400">
+              <p className="text-slate-600 dark:text-zinc-400 relative z-10">
                 To be the global benchmark for modern web development, defining the standard for how the next generation of applications are built.
               </p>
             </motion.div>

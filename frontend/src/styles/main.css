@@ -29,6 +29,15 @@ body {
   color: #f8fafc;
 }
 
+@media (pointer: fine) {
+  body {
+    cursor: none;
+  }
+  a, button, [role="button"], input, select, textarea {
+    cursor: none;
+  }
+}
+
 .light body {
   background-color: var(--color-background-light);
   color: #0f172a;
